@@ -17,7 +17,7 @@
 
                 if (propValue == null)
                 {
-                    return false;
+                    throw new Exception($"{myType.Name}.{property.Name} is not set");
                 }
 
                 try
@@ -26,7 +26,7 @@
 
                     if (propValue.Equals(instance))
                     {
-                        return false;
+                        throw new Exception($"{myType.Name}.{property.Name} has default value");
                     }
                 }
                 catch (MissingMethodException)
@@ -35,7 +35,7 @@
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    throw new Exception($"{myType.Name}.{property.Name} could not be validated", e);
                 }
             }
 
